@@ -10,11 +10,11 @@ const MemeForm = () => {
     e.preventDefault();
     const meme = {
       title,
-      image_url: imageURL || "https://i.imgur.com/Z6h60OZ.png",
+      image_url: imageURL,
       tags: tags.split(",").map((tag) => tag.trim()),
     };
     try {
-      await axios.post("http://localhost:5000/memes", meme);
+      await axios.post("http://localhost:5000/api/memes", meme);
       alert("Meme created!");
     } catch (err) {
       console.error(err);

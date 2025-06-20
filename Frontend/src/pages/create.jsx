@@ -1,4 +1,4 @@
-import MemeForm from "../components/memeForm";
+import MemeForm from "../components/MemeForm";
 
 const Create = () => {
   return (

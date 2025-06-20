@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        terminal: ["Share Tech Mono", "monospace"],
+        terminal: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
         glitch: "glitch 1s infinite",

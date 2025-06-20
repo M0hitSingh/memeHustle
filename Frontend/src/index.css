@@ -16,3 +16,14 @@
 .glitch {
   animation: glitch 1s infinite;
 }
+/* Custom Neon Scrollbar */
+.ps__thumb-y {
+  background-color: #ff00ff !important;
+  border-radius: 10px;
+  box-shadow: 0 0 6px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.ps__rail-y {
+  background: transparent !important;
+  width: 8px !important;
+}
