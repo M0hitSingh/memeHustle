@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:5000"); // replace with your backend URL if deployed
+import socket from "../utils/socket";
 
 const Leaderboard = () => {
   const [topMemes, setTopMemes] = useState([]);
@@ -30,13 +28,13 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className="w-full bg-zinc-900 bg-opacity-90 border border-pink-500 text-white p-4 rounded-xl shadow-lg font-terminal">
-      <h3 className="text-pink-500 text-lg font-bold glitch mb-2">🏆 Leaderboard</h3>
+    <div className="w-full bg-cyber-bg bg-opacity-90 text-white p-4 rounded-xl font-terminal">
+      <h3 className="text-neon-pink text-lg font-bold glitch mb-2 text-shadow-neon-pink">🏆 Leaderboard</h3>
       <ul className="text-sm space-y-2 max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-pink-600 pr-2">
         {topMemes.map((meme, idx) => (
-          <li key={meme.id} className="flex justify-between">
+          <li key={meme.id} className="flex justify-between p-1 rounded hover:bg-neon-pink hover:text-black transition-all duration-200">
             <span>{idx + 1}. {meme.title}</span>
-            <span className="text-pink-400">{meme.votes}🔥</span>
+            <span className="text-neon-pink font-bold">{meme.votes}🔥</span>
           </li>
         ))}
       </ul>

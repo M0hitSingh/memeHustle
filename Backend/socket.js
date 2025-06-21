@@ -1,11 +1,8 @@
-let ioInstance = null;
+let io = null;
 
-export const setSocketInstance = (io) => {
-  ioInstance = io;
+export const setSocketInstance = (socketInstance) => {
+  io = socketInstance;
+  console.log("✅ Socket instance set.");
 };
 
-export const emitLeaderboardUpdate = () => {
-  if (ioInstance) {
-    ioInstance.emit("leaderboard-update");
-  }
-};
+export const getSocketInstance = () => io;

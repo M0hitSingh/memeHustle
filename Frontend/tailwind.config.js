@@ -11,8 +11,8 @@ module.exports = {
         'cyber-bg': '#0a0a0a',
       },
       boxShadow: {
-        'neon-pink': '0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, inset 0 0 5px #ff00ff',
-        'neon-blue': '0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff, inset 0 0 5px #00bfff',
+        'neon-pink': '0 0 6px rgba(255, 0, 255, 0.6), inset 0 0 4px rgba(255, 0, 255, 0.4)',
+        'neon-blue': '0 0 6px rgba(0, 191, 255, 0.6), inset 0 0 4px rgba(0, 191, 255, 0.4)',
       },
       animation: {
         glitch: "glitch 1s infinite",

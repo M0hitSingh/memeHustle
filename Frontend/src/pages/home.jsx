@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MemeCard from "../components/MemeCard";
 import Leaderboard from "../components/Leaderboard";
+import BidScreen from "../components/BidScreen"
 import Sidebar from "../components/Sidebar";
 import "../styles/scrollbar.css"; // Add a custom CSS file to style scrollbar
 
@@ -28,10 +29,10 @@ const Home = () => {
       : memes.filter((meme) => meme.tags.includes(selectedTag));
 
   return (
-    <div className="h-screen bg-black text-white font-terminal overflow-hidden">
+    <div className="h-screen bg-cyber-bg text-white font-terminal overflow-hidden">
       {/* Header */}
-      <header className="p-4 border-b border-pink-500 text-center text-pink-400 text-3xl font-bold glitch">
-        Meme Hustle Marketplace 🧠🌐
+      <header className="p-4 border-b border-neon-pink text-center text-neon-pink text-3xl font-bold glitch text-shadow-neon-pink">
+       ( -_-) Meme Hustle (=_= )
       </header>
 
       {/* Grid layout */}
@@ -46,16 +47,16 @@ const Home = () => {
           <div className="space-y-4 h-full overflow-y-scroll invisible-scrollbar pr-1">
             {/* Filter Bar */}
             <div className="flex flex-wrap gap-2 mb-2 sticky top-0 bg-black z-10 py-2">
-              {["all", "crypto", "funny", "stonks", "matrix", "cat", "finance"].map(
+              {["all", ...Array.from(new Set(memes.flatMap((m) => m.tags)))].map(
                 (tag) => (
                   <button
                     key={tag}
                     onClick={() => setSelectedTag(tag)}
-                    className={`px-3 py-1 rounded-full text-sm border ${
+                    className={`px-3 py-1 rounded-full text-sm border transition-all duration-300 ${
                       selectedTag === tag
-                        ? "bg-pink-600 text-white border-pink-400"
-                        : "bg-zinc-800 text-gray-300 border-zinc-600"
-                    } hover:bg-pink-500 transition`}
+                        ? "bg-neon-pink text-white border-neon-pink shadow-neon-pink"
+                        : "bg-gray-800 text-gray-300 border-gray-600 hover:bg-neon-pink hover:text-white hover:border-neon-pink hover:shadow-neon-pink"
+                    }`}
                   >
                     #{tag}
                   </button>
@@ -82,9 +83,14 @@ const Home = () => {
         {/* Spacer - 1/12 */}
         <div className="col-span-1" />
 
-        {/* Leaderboard - 2/12 */}
-        <aside className="md:col-span-2 bg-zinc-900 p-4 rounded border border-zinc-700 h-full">
-          <Leaderboard />
+        {/* Leaderboard &  Bid- 2/12 */}
+        <aside className="md:col-span-2 bg-cyber-bg p-4 rounded border border-neon-blue shadow-neon-blue h-full flex flex-col gap-4">
+          <div className="h-1/2 overflow-hidden">
+            <Leaderboard />
+          </div>
+          <div className="h-1/2 overflow-hidden">
+            <BidScreen />
+          </div>
         </aside>
       </div>
     </div>

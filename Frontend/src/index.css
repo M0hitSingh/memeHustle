@@ -19,10 +19,10 @@ code {
 
 @layer utilities {
   .text-shadow-neon-blue {
-    text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 40px #00bfff, 0 0 80px #00bfff;
+    text-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
   }
   .text-shadow-neon-pink {
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
   }
   .box-shadow-neon-blue {
     box-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff, inset 0 0 5px #00bfff;
