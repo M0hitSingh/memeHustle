@@ -142,6 +142,7 @@ router.post("/:id/vote", async (req, res) => {
   res.json(data);
 });
 
+const bidMessages = [];
 router.post("/:id/bid", async (req, res) => {
   const { id: meme_id } = req.params;
   const { credits, user_id, title } = req.body;
@@ -193,11 +194,11 @@ router.post("/:id/bid", async (req, res) => {
 
 
     // Emit socket event
-    console.log(`${userData.username || "A user"} bid ${credits} credits on ${title}`)
     io.emit("bid-news", {
       message: `${userData.username || "A user"} bid ${credits} credits on ${title}`,
       meme_id,
       credits,
+      username: userData.username
     });
 
     res.status(201).json(bidData);

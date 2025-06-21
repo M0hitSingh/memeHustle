@@ -5,6 +5,7 @@ import BidScreen from "../components/BidScreen"
 import Sidebar from "../components/Sidebar";
 import "../styles/scrollbar.css"; // Add a custom CSS file to style scrollbar
 import api from "../utils/api";
+import socket from "../utils/socket";
 
 const Home = () => {
   const [memes, setMemes] = useState([]);
@@ -21,12 +22,38 @@ const Home = () => {
     };
 
     fetchMemes();
+
+    const handleNewBid = (data) => {
+      setMemes((prevMemes) =>
+        prevMemes.map((meme) =>
+          meme.id == data.meme_id
+            ? {
+                ...meme,
+                highest_bid: data.credits,
+                highest_bid_user: data.username,
+              }
+            : meme
+        )
+      );
+    };
+
+    socket.on("bid-news", handleNewBid);
+
+    return () => {
+      socket.off("bid-news", handleNewBid);
+    };
   }, []);
 
   const filteredMemes =
     selectedTag === "all"
       ? memes
       : memes.filter((meme) => meme.tags.includes(selectedTag));
+
+  const handleVoteSuccess = (updatedMeme) => {
+    setMemes((prev) =>
+      prev.map((m) => (m.id === updatedMeme.id ? updatedMeme : m))
+    );
+  };
 
   return (
     <div className="h-screen bg-cyber-bg text-white font-terminal overflow-hidden">
@@ -70,11 +97,7 @@ const Home = () => {
               filteredMemes.map((meme) => <MemeCard
                 key={meme.id}
                 meme={meme}
-                onVoteSuccess={(updatedMeme) => {
-                  setMemes((prev) =>
-                    prev.map((m) => (m.id === updatedMeme.id ? updatedMeme : m))
-                  );
-                }}
+                onVoteSuccess={handleVoteSuccess}
               />)
             )}
           </div>
