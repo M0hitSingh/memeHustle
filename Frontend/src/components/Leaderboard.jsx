@@ -15,18 +15,17 @@ const Leaderboard = () => {
       console.error("Failed to fetch leaderboard:", err);
     }
   };
-  console.log(topMemes)
   useEffect(() => {
     fetchLeaderboard();
-
-    // Listen for real-time updates
-    socket.on("leaderboard-update", (data) => {
+  
+    const handleUpdate = (data) => {
       setTopMemes(data);
-    });
-
-    // Cleanup on unmount
+    };
+  
+    socket.on("leaderboard-update", handleUpdate);
+  
     return () => {
-      socket.off("leaderboard-update");
+      socket.off("leaderboard-update", handleUpdate);
     };
   }, []);
 
@@ -37,7 +36,7 @@ const Leaderboard = () => {
         {topMemes.map((meme, idx) => (
           <li key={meme.id} className="flex justify-between">
             <span>{idx + 1}. {meme.title}</span>
-            <span className="text-pink-400">{meme.upvotes}🔥</span>
+            <span className="text-pink-400">{meme.votes}🔥</span>
           </li>
         ))}
       </ul>
