@@ -4,6 +4,7 @@ import Leaderboard from "../components/Leaderboard";
 import BidScreen from "../components/BidScreen"
 import Sidebar from "../components/Sidebar";
 import "../styles/scrollbar.css"; // Add a custom CSS file to style scrollbar
+import api from "../utils/api";
 
 const Home = () => {
   const [memes, setMemes] = useState([]);
@@ -12,9 +13,8 @@ const Home = () => {
   useEffect(() => {
     const fetchMemes = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/memes");
-        const data = await response.json();
-        setMemes(data);
+        const response = await api.get("/api/memes");
+        setMemes(response.data);
       } catch (error) {
         console.error("Failed to fetch memes:", error);
       }

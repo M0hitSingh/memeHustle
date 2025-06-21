@@ -1,14 +1,14 @@
 import React from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../utils/api";
 
 const MemeCard = ({ meme, onVoteSuccess }) => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const handleVote = async (type) => {
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/memes/${meme.id}/vote`,
+      const res = await api.post(
+        `/api/memes/${meme.id}/vote`,
         {
           type,
         }
@@ -31,8 +31,7 @@ const MemeCard = ({ meme, onVoteSuccess }) => {
     if (!credits || isNaN(credits)) return alert("Please enter a valid number");
 
     try {
-      console.log(user)
-      const res = await axios.post(`http://localhost:5000/api/memes/${meme.id}/bid`, {
+      await api.post(`/api/memes/${meme.id}/bid`, {
         meme_id: meme.id,
         title: meme.title,
         username: user.name,

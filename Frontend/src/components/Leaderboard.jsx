@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import socket from "../utils/socket";
+import api from "../utils/api";
 
 const Leaderboard = () => {
   const [topMemes, setTopMemes] = useState([]);
   // Fetch initial leaderboard
   const fetchLeaderboard = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/memes/leaderboard?top=10");
-      const data = await res.json();
-      setTopMemes(data);
+      const res = await api.get("/api/memes/leaderboard?top=10");
+      setTopMemes(res.data);
     } catch (err) {
       console.error("Failed to fetch leaderboard:", err);
     }

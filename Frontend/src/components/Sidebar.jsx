@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "../redux/userSlice";
+import api from "../utils/api";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -15,16 +16,13 @@ const Sidebar = () => {
     const registerUser = async () => {
       if (isAuthenticated && user) {
         try {
-          const res = await fetch("http://localhost:5000/api/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: user.name,
-              picture: user.picture,
-            }),
+          const res = await api.post("/api/users", {
+            name: user.name,
+            picture: user.picture,
           });
 
-          const data = await res.json();
+          const data = res.data;
+          
           dispatch(setUser(data.user)); // Save user to Redux store
 
           console.log("🟢 User synced and stored in Redux:", data);

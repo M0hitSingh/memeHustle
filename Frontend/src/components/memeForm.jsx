@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const MemeForm = () => {
@@ -25,7 +25,8 @@ const MemeForm = () => {
     console.log(meme)
 
     try {
-      await axios.post("http://localhost:5000/api/memes", meme);
+      await api.post("/api/memes", meme);
+      alert("Meme created!");
       navigate("/");
     } catch (err) {
       console.error(err);
